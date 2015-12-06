@@ -1,5 +1,6 @@
 package com.chamelot.motor;
 
+import lejos.nxt.Button;
 import lejos.nxt.LCD;
 import lejos.nxt.MotorPort;
 import lejos.nxt.Sound;
@@ -16,15 +17,15 @@ public class AimMotors {
 	private boolean rightForward;
 	
 	public AimMotors(){
-		leftMotor = new Motor(MotorPort.A, 30);
-		rightMotor = new Motor(MotorPort.C, 30);
-		
-		leftMotor.resetTachoCount();
-		rightMotor.resetTachoCount();
+		leftMotor = new Motor(MotorPort.A, 20);
+		rightMotor = new Motor(MotorPort.C, 20);
 		
 		leftMotor.startStallTest();
 		rightMotor.startStallTest();
-
+		
+		
+		rightTarget = 0;
+		leftTarget = 0;
 		run = false;
 	}
 	
@@ -42,11 +43,17 @@ public class AimMotors {
 				rightDone = true;
 			}
 		}
-		
+		Sound.beep();
 		leftMotor.resetTachoCount();
 		rightMotor.resetTachoCount();
 		leftMotor.rotateTo(-180);
 		rightMotor.rotateTo(90);
+		while(leftMotor.rotationDone() == false || rightMotor.rotationDone() == false){
+			
+		}
+		LCD.drawInt(leftMotor.getTachoCount(), 0, 0);
+		LCD.drawInt(rightMotor.getTachoCount(), 0, 1);
+		Button.waitForAnyEvent(0);
 		leftMotor.resetTachoCount();
 		rightMotor.resetTachoCount();
 	}
@@ -80,18 +87,26 @@ public class AimMotors {
 			int errRight = 0;
 			int errLeftPrev, errRightPrev;
 			int powerLeft, powerRight;
-			byte idx = 0;
+			LCD.clear();
 			
 			while(run){
 				errLeftPrev = errLeft;
 				errRightPrev = errRight;
-					
+				
+				LCD.drawInt(leftMotor.getTachoCount(), 3, 0, 0);
+				LCD.drawInt(rightMotor.getTachoCount(), 3, 0, 1);	
+				
 				errLeft = leftTarget - leftMotor.getTachoCount();
 				errRight = rightTarget - rightMotor.getTachoCount();
 					
 				powerLeft = errLeft * 2 + (errLeft - errLeftPrev) * 5;
 				powerRight = errRight * 2 + (errRight - errRightPrev) * 5;
-					
+				
+				LCD.drawInt(errLeft, 3, 0, 2);
+				LCD.drawInt(errRight, 3, 0, 3);
+				LCD.drawInt(powerLeft, 3, 0, 4);
+				LCD.drawInt(powerRight, 3, 0, 5);
+				
 				if(powerLeft >= 0){
 					leftForward = true;
 					if(powerLeft > 40) powerLeft = 40;
@@ -121,6 +136,7 @@ public class AimMotors {
 					rightMotor.forward(powerRight);
 				else
 					rightMotor.backward(powerRight);
+				
 			}
 		}	
 	}	

@@ -1,9 +1,7 @@
-package com.chamelot;
+package com.chamelot.communication;
 
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -16,8 +14,6 @@ public class Communication extends Thread{
 	private OutputStream oS;
 	private byte[] data = {0, 0, 0, 0};
 	private boolean read;
-	
-	private Thread reader;
 	
 	private ArrayList<ReadListener>listenerList = new ArrayList<ReadListener>();
 	

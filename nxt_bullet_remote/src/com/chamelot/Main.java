@@ -3,6 +3,8 @@ package com.chamelot;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import com.chamelot.gui.Window;
+
 import lejos.pc.comm.NXTConnector;
 
 public class Main {

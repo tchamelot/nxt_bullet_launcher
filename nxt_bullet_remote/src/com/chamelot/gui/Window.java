@@ -1,7 +1,10 @@
-package com.chamelot;
+package com.chamelot.gui;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import com.chamelot.communication.Communication;
+import com.chamelot.communication.ReadListener;
 
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;

@@ -8,7 +8,6 @@ import com.chamelot.communication.ReadListener;
 import java.io.IOException;
 import java.io.InputStream;
 
-import lejos.nxt.LCD;
 import lejos.nxt.Sound;
 import lejos.nxt.comm.Bluetooth;
 import lejos.nxt.comm.USB;
@@ -30,10 +29,10 @@ public class Communication extends Thread{
 	public Communication(int mode)  throws NXTCommException {
 		switch(mode){
 		case USB_MODE:
-			conn = USB.waitForConnection(30000, NXTConnection.PACKET);
+			conn = USB.waitForConnection(9000, NXTConnection.PACKET);
 			break;
 		case BLUETOOTH_MODE:
-			conn = Bluetooth.waitForConnection(30000, NXTConnection.PACKET);
+			conn = Bluetooth.waitForConnection(9000, NXTConnection.PACKET);
 			break;
 		default:
 			throw new NXTCommException();

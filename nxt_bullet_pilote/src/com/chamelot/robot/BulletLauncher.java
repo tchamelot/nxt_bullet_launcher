@@ -5,9 +5,7 @@ import com.chamelot.communication.NXTCommException;
 import com.chamelot.communication.ReadListener;
 import com.chamelot.motor.AimMotors;
 
-import lejos.nxt.Button;
 import lejos.nxt.LCD;
-import lejos.nxt.Sound;
 
 public class BulletLauncher {
 	private AimMotors motors;

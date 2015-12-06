@@ -7,10 +7,8 @@ import lejos.nxt.comm.USB;
 import lejos.nxt.Button;
 import lejos.nxt.LCD;
 
-import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 
 import com.chamelot.motor.*;
 
@@ -99,7 +97,7 @@ public class Main {
 			} catch (IOException e) {
 			}
 			Sound.beep();
-			Button.ENTER.waitForAnyPress();
+			Button.waitForAnyPress();
 		}
 		
 		conn.close();
